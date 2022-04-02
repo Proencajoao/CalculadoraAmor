@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,39 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  nome1 = '';
+  nome2 = '';
+  url = "http://lucasreno.kinghost.net/love-calculator/";
+  resultado = 0;
+  mensagem = '';
+  calculando = false;
+  imagem = false
 
+  constructor(public http: HttpClient) { }
+
+  async enviarDados() {
+    let soma = 0;
+    this.imagem = false
+    while (soma != 10) {
+      this.resultado = Math.floor(Math.random() * 100 + 1);
+      this.calculando = true;
+      soma += 1;
+      await this.delay(75);
+    }
+    this.calculando = false;
+
+    this.http.get<any>(this.url + this.nome1 + "/" + this.nome2).subscribe(
+      (resposta: any) => {
+        this.resultado = resposta;
+        if (this.resultado <= 20) this.mensagem = "Você possui chances, mas não com essa pessoa";
+        else if (this.resultado <= 40) this.mensagem = "Para de se iludir, sua carreira é solo";
+        else if (this.resultado <= 60) this.mensagem = "As chances são médias, não desista";
+        else if (this.resultado <= 80) this.mensagem = "Só chegar na cremosa(o), as chances são enormes";
+        else this.imagem = true;
+      }
+    );
+  }
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }
