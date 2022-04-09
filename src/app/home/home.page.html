@@ -1,32 +1,40 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color = "warning">
     <ion-title>
-      SZ Calculadora do Amor SZ
+      SZ Calculadora do Amor SZ 
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="content"color="primary">
   
-    <h3 class="mt -3 ms-3">Calcule as suas chances com o seu Amor </h3>
+    <h3 class="d-flex justify-content-center mt -2 ms-3">Calcule as suas chances com o seu Amor </h3>
 
-  <div id="container" class="justiy-content-center mt -4">
-    <div>
-      <p>Informe o 1° nome</p>
+  <div id="container" class="justiy-content-center mt-5 ms-3">
+    <div class="mx-5">
+
+      <p class="nome">Informe o seu nome</p>
       <input type="text" class="form-control" [(ngModel)]="nome1">
       <br>
 
-      <p>Informe o 2° nome</p>
+      <p class="nome">Informe o nome da amada(o)</p>
       <input type="text" class="form-control" [(ngModel)]="nome2">
       <br>
 
 
-      <button class="btn btn-danger mt -3 ms -5" (click)="enviarDados()">CALCULAR</button>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-outline-dark mt-3 " (click)="enviarDados()">CALCULAR</button>
+      </div>
+      
 
       <br> <br>
 
     <p [class.painel]="calculando" [class.scale-up-center]="!calculando" class="mt-3 text-center" id="resultado">{{ resultado }} % </p>
-    <p id="mensagem">{{ mensagem }}</p><img [class.d-none]="!imagem" src="../../assets/img/roonaldinho.jpg" alt="">
+
+    <div class="msgVazia">
+      <p class="d-flex justify-content-center" id="mensagem">{{ mensagem }}</p>
+    </div>
+      <!-- <img [class.d-none]="!imagem" src="../../assets/img/roonaldinho.jpg" alt=""> -->
     </div>  
   </div>
 </ion-content>
